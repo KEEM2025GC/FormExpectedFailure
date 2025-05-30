@@ -48,16 +48,14 @@
         <input type="text" class="form-control" id="dob" name="dob"
                required aria-required="true" aria-describedby="dobHelp" placeholder="05-Mar-2000">
         <div id="dobHelp" class="form-text">Format: dd-MMM-yyyy (e.g., 05-Mar-2000). You must be at least 18 years old.</div>
-        <div class="invalid-feedback">Enter a valid date in dd-MMM-yyyy format and ensure you're at least 18.</div>
       </div>
 
       <!-- Phone Number -->
       <div class="mb-3">
-        <label for="phone" class="form-label text-dark">Phone Number <span class="text-danger">*</span></label>
+        <label for="phone" class="form-label text-dark">Phone Number</label>
         <input type="text" class="form-control" id="phone" name="phone"
-               aria-describedby="phoneHelp" required aria-required="true" maxlength="15" inputmode="numeric">
+               aria-describedby="phoneHelp" maxlength="15" inputmode="numeric">
         <div id="phoneHelp" class="form-text">Digits only. Max 15 characters.</div>
-        <div class="invalid-feedback" id="phoneError"></div>
       </div>
 
       <!-- Email -->
@@ -143,22 +141,10 @@
 
   const form = document.getElementById('userForm');
   const phoneField = document.getElementById('phone');
-  const phoneError = document.getElementById('phoneError');
   const genderField = document.getElementById('gender');
   const otherGenderContainer = document.getElementById('otherGenderContainer');
   const otherGenderInput = document.getElementById('otherGender');
   const otherGenderError = document.getElementById('otherGenderError');
-
-  phoneField.addEventListener('input', function () {
-    const onlyDigits = /^[0-9]*$/;
-    if (!onlyDigits.test(phoneField.value)) {
-      phoneField.setCustomValidity('Enter only numbers.');
-      phoneError.textContent = 'Enter only numbers.';
-    } else {
-      phoneField.setCustomValidity('');
-      phoneError.textContent = '';
-    }
-  });
 
   genderField.addEventListener('change', () => {
     if (genderField.value === 'Others') {
@@ -214,14 +200,6 @@
       dob.setCustomValidity('Enter a valid date in dd-MMM-yyyy format. Must be at least 18 years old.');
     } else {
       dob.setCustomValidity('');
-    }
-
-    if (phoneField.value.length > 15) {
-      phoneField.setCustomValidity('Maximum limit: 15 digits.');
-      phoneError.textContent = 'Maximum limit: 15 digits.';
-    } else if (phoneField.value.trim() === '') {
-      phoneField.setCustomValidity('Enter a number for this field.');
-      phoneError.textContent = 'Enter a number for this field.';
     }
 
     if (genderField.value === 'Others') {
